@@ -6,10 +6,10 @@
 /*   By: obelhami <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:54:28 by obelhami          #+#    #+#             */
-/*   Updated: 2023/11/25 17:37:14 by obelhami         ###   ########.fr       */
+/*   Updated: 2023/12/24 13:16:24 by obelhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include"libft.h"
+#include "libft.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {

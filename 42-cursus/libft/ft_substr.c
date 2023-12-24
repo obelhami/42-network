@@ -6,7 +6,7 @@
 /*   By: obelhami <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 14:33:09 by obelhami          #+#    #+#             */
-/*   Updated: 2023/11/23 10:26:52 by obelhami         ###   ########.fr       */
+/*   Updated: 2023/12/24 13:15:59 by obelhami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -31,7 +31,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	i = 0;
 	if (ft_strlen(s) > start)
 		while (s[start] && i < len)
-		substr[i++] = s[start++];
+			substr[i++] = s[start++];
 	substr[i] = 0;
 	return (substr);
 }
