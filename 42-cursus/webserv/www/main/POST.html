@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>POST Method Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      width: 350px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      text-align: left;
+      color: #555;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    input[type="submit"] {
+      margin-top: 15px;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      background: #4CAF50;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background: #45a049;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #4CAF50;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>POST Method Test</h2>
+    <form id="uploadForm" action="/upload" method="post">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="message">Message:</label>
+      <input type="text" id="message" name="message" required>
+
+      <input type="submit" value="Send POST">
+    </form>
+
+    <div id="successMessage" class="message">
+      ✅ Data sent successfully!
+    </div>
+  </div>
+  <!-- <script>
+  const form = document.getElementById("uploadForm");
+  const successMessage = document.getElementById("successMessage");
+
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault(); // prevent normal reload
+
+    const formData = new URLSearchParams(new FormData(form));
+
+    try {
+      let response = await fetch(form.action, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: formData.toString()
+      });
+
+      if (response.ok) {
+        successMessage.style.display = "block";
+        successMessage.style.color = "#4CAF50";
+        successMessage.textContent = "✅ Data sent successfully!";
+        alert("✅ Data sent successfully!");
+        form.reset();
+      } else {
+        successMessage.style.display = "block";
+        successMessage.style.color = "red";
+        successMessage.textContent = "❌ Sending failed!";
+        alert("❌ Sending failed!");
+      }
+    } catch (error) {
+      successMessage.style.display = "block";
+      successMessage.style.color = "red";
+      successMessage.textContent = "⚠️ Error: " + error.message;
+      alert("⚠️ Error: " + error.message);
+    }
+  });
+</script> -->
+
+<script>
+const form = document.getElementById("uploadForm");
+const successMessage = document.getElementById("successMessage");
+
+form.addEventListener("submit", async function (event) {
+  event.preventDefault(); // prevent normal reload
+  successMessage.style.display = "none";
+
+  const formData = new URLSearchParams(new FormData(form));
+
+  try {
+    let response = await fetch(form.action, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: formData.toString()
+    });
+
+    if (response.ok) {
+      successMessage.style.display = "block";
+      successMessage.style.color = "#4CAF50";
+      successMessage.textContent = "✅ Data sent successfully!";
+      alert("✅ Data sent successfully!");
+      form.reset();
+    } else {
+      // Handle specific HTTP status codes
+      let msg;
+      switch (response.status) {
+        case 403:
+          msg = "❌ Error 403: Forbidden!";
+          break;
+        case 404:
+          msg = "❌ Error 404: Not Found!";
+          break;
+        case 405:
+          msg = "❌ Error 405: Method Not Allowed!";
+          break;
+        case 500:
+          msg = "❌ Error 500: Internal Server Error!";
+          break;
+        default:
+          msg = `❌ Error ${response.status}: ${response.statusText}`;
+      }
+      successMessage.style.display = "block";
+      successMessage.style.color = "red";
+      successMessage.textContent = msg;
+      alert(msg);
+    }
+  } catch (error) {
+    successMessage.style.display = "block";
+    successMessage.style.color = "red";
+    successMessage.textContent = "⚠️ Network Error: " + error.message;
+    alert("⚠️ Network Error: " + error.message);
+  }
+});
+</script>
+
+</body>
+</html>
